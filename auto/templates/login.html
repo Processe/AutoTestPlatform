@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>AutoTest - 自动化测试平台</title>
+
+        <meta name="keywords" content="AutoTest, 自动化测试平台, web ide">
+        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    </head>
+    <body>
+        <div class="header">
+        </div>
+        <div class="content">
+            <div class="wrapper fn-clear">
+                <div class="fn-left">
+                    <h2>All in AutoTest</h2>
+                    {% for comment in comments %}
+                        <h2>{{ comment }}</h2>
+                    {% endfor %}
+                </div>
+                <div class="form fn-right">
+                    <div id="msg" class="fn-none"></div>
+                    <form id="login_fm" action="/api/auth/" method="post">
+                        <input id="username" name="username" placeholder="用户名"><br><br>
+                        <input id="password" name="password" type="password" placeholder="密码"><br><br>
+                        <input class="btn-white btn" type="button" value="登录" onclick="do_login(&#39;login_fm&#39;)">
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <script src="{{ url_for('static', filename='lib/easyui/jquery.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='lib/easyui/jquery.easyui.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/auto.js') }}"></script>
+        <script>
+            $(function () {
+                $("body").keydown(function(event) {
+                    if (event.keyCode == "13") {//keyCode=13是回车键
+                        if($("#username").val() == ""){
+                            $("#username").focus();
+                        }
+                        else if($("#password").val() == ""){
+                            $("#password").focus();
+                        }
+                        else{
+                            do_login('login_fm');
+                        }
+                    }
+                });
+            });
+        </script>
+    
+</body></html>
